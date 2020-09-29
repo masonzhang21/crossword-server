@@ -1,7 +1,8 @@
 <p align="center"><img src=".insert_logo_here" width=700px/></p>
 
 <h1 align="center">Websocket Server for Acrossword</h1>
-<p align="center"> Development is ongoing! </p>
+<p align="center"> See main repo <a href="https://github.com/masonzhang21/acrossword"> here </a>! </p>
+
 
 ## Technologies
 - Javascript
