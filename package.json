@@ -1,0 +1,27 @@
+{
+  "name": "crossword-server",
+  "version": "1.0.0",
+  "description": "Websocket server for the Multiplayer Crossword app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/masonzhang21/crossword-server.git"
+  },
+  "author": "Mason Zhang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/masonzhang21/crossword-server/issues"
+  },
+  "homepage": "https://github.com/masonzhang21/crossword-server#readme",
+  "dependencies": {
+    "eslint": "^7.5.0",
+    "express": "^4.17.1",
+    "firebase-admin": "^9.0.0",
+    "nodemon": "^2.0.4",
+    "socket.io": "^2.3.0"
+  }
+}
