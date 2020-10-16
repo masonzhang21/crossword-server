@@ -20,6 +20,7 @@ async function writeGameToDB(game) {
         storedInput[i] = game.input[i]
     }
     storedGame["input"] = storedInput
+    storedGame["secondsElapsed"] = game.secondsElapsed
     const res = await db.collection('games').doc(game.gameID).set(storedGame);
     return res
 

@@ -1,3 +1,4 @@
+const playerColors = require('./playerColors')
 class Player {
 
     constructor(playerID, color, initialTileLoc, initialWordLoc) {
@@ -10,11 +11,14 @@ class Player {
 }
 
 class Game {
-  constructor(gameID, input) {
+  constructor(gameID, input, secondsElapsed) {
     this.gameID = gameID;
     this.input = input;
+    this.secondsElapsed = secondsElapsed
     this.connectedPlayers = {}
     this.syncMode = false
+    setInterval(() => {this.secondsElapsed++}, 1000)
+    this.availableColors = [...playerColors]
   }
 
   updateInput(loc, newChar) {
@@ -32,8 +36,9 @@ class Game {
   /**
    * Called when a player joins the game.
    */
-  addPlayer(playerID, color, initialTile, initialWord) {
-    const newPlayer = new Player(playerID, color, initialTile, initialWord)
+  addPlayer(playerID, preferredColor, initialTile, initialWord) {
+    let actualColor = preferredColor in this.availableColors ? preferredColor : this.availableColors.pop()
+    const newPlayer = new Player(playerID, actualColor, initialTile, initialWord)
     this.connectedPlayers[playerID] = newPlayer
     return newPlayer
   }

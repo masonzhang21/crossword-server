@@ -1,5 +1,7 @@
 var Game = require('./Game').Game
 const {retrieveGameFromDB, writeGameToDB} = require('./firestoreIO')
+const playerColors = require('./playerColors')
+
 // Setup basic express server
 var express = require('express');
 var app = express();
@@ -35,15 +37,16 @@ io.on('connection', (socket) => {
       if (storedGame) {
         //input stored as object of 1D arrays since firestore doesn't allow nested arrays
         const input = Object.values(storedGame.input)
-        games[gameID] = new Game(gameID, input)
+        games[gameID] = new Game(gameID, input, storedGame.secondsElapsed)
       } else {
         //Upon initial creation of multiplayer game (executes once per gameID). Uses the user's current state of game as the initial input grid. 
-        games[gameID] = new Game(gameID, data.curInput)
+        games[gameID] = new Game(gameID, data.curInput, data.secondsElapsed)
       }
     }
 
     game = games[gameID]
-    let playerColor = "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);});
+    let playerColor = playerColors[game.numPlayers() % playerColors.length]
+    console.log(game.input)
     game.addPlayer(playerID, playerColor, data.curTile, data.curWord)
     socket.join(gameID)
     socket.emit("ready", game)
